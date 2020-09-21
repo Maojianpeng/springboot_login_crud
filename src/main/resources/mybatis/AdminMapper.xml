@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mingbyte.dao.AdminDao">
+
+    <select id="loginAdminByTelAndPass" resultType="com.mingbyte.pojo.vo.AdminVo">
+        SELECT *
+		FROM admin
+		WHERE tel = #{tel}
+		AND password = #{password}
+    </select>
+
+    <insert id="registerAdmin" parameterType="com.mingbyte.pojo.vo.RegisterVo">
+        INSERT INTO admin (admin_name,password,tel)
+        VALUE (#{admin_name},#{password},#{tel})
+    </insert>
+</mapper>

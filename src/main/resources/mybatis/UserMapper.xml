@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mingbyte.dao.UserDao">
+
+    <select id="findUserById" parameterType="java.lang.Long" resultType="com.mingbyte.pojo.vo.UserVo">
+        SELECT *
+        FROM t_user
+        WHERE id = #{id}
+    </select>
+
+    <select id="allUser" resultType="com.mingbyte.pojo.vo.UserVo">
+        SELECT *
+        FROM t_user
+        ORDER BY age
+    </select>
+
+    <insert id="addUser" parameterType="com.mingbyte.pojo.vo.UserVo">
+        INSERT INTO t_user (user_name,age)
+        VALUE (#{user_name},#{age})
+    </insert>
+
+    <select id="selectPageUser" resultType="com.mingbyte.pojo.vo.UserVo">
+        SELECT *
+        FROM t_user
+        <where>
+            <if test="dto.userName != null">and user_name = #{dto.userName}</if>
+            <if test="dto.age != null">and age = #{dto.age}</if>
+            <if test="dto.isDelete != null">and is_delete = #{dto.isDelete}</if>
+        </where>
+        ORDER BY id
+    </select>
+    
+<!--    <update id="updateUser" parameterType="com.mingbyte.pojo.vo.UserVo">-->
+<!--        UPDATE t_user-->
+<!--        SET user_name=#{userName},-->
+<!--            age=#{age}-->
+<!--        WHERE id = #{id}-->
+<!--    </update>-->
+
+<!--    <update id="deleteUser" parameterType="com.mingbyte.pojo.vo.UserVo">-->
+<!--        UPDATE t_user-->
+<!--        SET is_delete = #{isDelete}-->
+<!--        WHERE id = #{id}-->
+<!--    </update>-->
+</mapper>
