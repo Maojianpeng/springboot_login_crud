@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>登录页面</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+<body>
+<form id="form-login">
+    <center>
+        <tr>
+            <td>手机号<input type="text" id="tel" name="tel"></td><br>
+            <td>密码<input type="password" id="password" name="password"></td><br>
+            <td><input type="button" value="登录" id="btn-login"></td>
+            <a href="register.html">进入注册界面</a>
+        </tr>
+    </center>
+</form>
+
+<script type="text/javascript">
+    $("#btn-login").click(function() {
+        // alert($("#form-login").serialize());
+        let val = {};
+        let telVal = document.getElementById("tel").value;
+        let pwdVal = document.getElementById("password").value;
+        val.tel = telVal;
+        val.password = pwdVal;
+        $.ajax({
+            "url":"/login/gologin",
+            // "data":$("#form-login").serialize(),
+            "type":"post",
+            "contentType": "application/json; charset=UTF-8",
+            "dataType":"json",
+            "data":JSON.stringify(val),
+            "success":function (data) {
+                if (data.code == 0) {
+                    alert("登录成功："+data.message);
+                    location.href="show.html";
+                } else if (data.code == 2){
+                    alert(data.message+"登录失败");
+                    location.href="index.html";
+                }
+            }
+        });
+    });
+</script>
+
+</body>
+</html>

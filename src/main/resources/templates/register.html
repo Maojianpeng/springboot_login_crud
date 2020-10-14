@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>注册页面</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+<body>
+<form id="form-reg">
+    <center>
+        <tr>
+            <td>手机号<input type="text" id="tel" name="tel"></td><br>
+            <td>密码<input type="password" id="password" name="password"></td><br>
+            <td><input type="button" value="注册" id="btn-reg"></td>
+            <a href="login.html">进入登录界面</a>
+        </tr>
+    </center>
+</form>
+
+<script type="text/javascript">
+    $("#btn-reg").click(function() {
+        // alert("准备注册！");
+        let val = {};
+        let telVal = document.getElementById("tel").value;
+        let pwdVal = document.getElementById("password").value;
+        val.tel = telVal;
+        val.password = pwdVal;
+        $.ajax({
+            "url":"/login/regist",
+            "data":$("#form-reg").serialize(),
+            "type":"put",
+            "contentType": "application/json; charset=UTF-8",
+            "dataType":"json",
+            "data":JSON.stringify(val),
+            "success":function (data) {
+                if (data.code == 4) {
+                    alert(data.message);
+                } else {
+                    alert("注册失败：");
+                    location.href="index.html";
+                }
+            }
+        });
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>添加用户</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+<body>
+<form id="form-reg">
+    <center>
+        <tr>
+            <td>用户名<input type="text" id="userName" name="userName"></td><br>
+            <td>年龄<input type="text" id="age" name="age"></td><br>
+            <td><input type="button" value="确定" id="btn-reg"></td>
+        </tr>
+    </center>
+</form>
+
+<script type="text/javascript">
+    $("#btn-reg").click(function() {
+        // alert("准备注册！");
+        let val = {};
+        let nameVal = document.getElementById("userName").value;
+        let ageVal = document.getElementById("age").value;
+        val.userName = nameVal;
+        val.age = ageVal;
+        $.ajax({
+            "url":"/user/adduser",
+            "data":$("#form-reg").serialize(),
+            "type":"put",
+            "contentType": "application/json; charset=UTF-8",
+            "dataType":"json",
+            "data":JSON.stringify(val),
+            "success":function (data) {
+                if (data.code == 5) {
+                    alert(data.message);
+                    location.href="show.html";
+                } else {
+                    alert("注册失败：");
+                    location.href="show.html";
+                }
+            }
+        });
+    });
+</script>
+
+</body>
+</html>

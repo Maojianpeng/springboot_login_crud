@@ -21,9 +21,9 @@ public interface UserDao extends BaseMapper<User> {
 
     UserVo addUser(UserVo userVo);
 
-    UserVo updateUser(Long id);
-
-    UserVo deleteUser(Long id);
+//    UserVo updateUser(Long id);
+//
+//    UserVo deleteUser(Long id);
 
     List<UserVo> allUser();
 

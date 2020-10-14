@@ -39,7 +39,7 @@ public class LoginController {
    * @throws Exception
    */
   @ResponseBody
-  @PutMapping("/register")
+  @PutMapping("/regist")
   public ResponseVo register(@Valid @RequestBody RegisterDto registerDto) throws Exception{
     return this.loginService.adminRegister(registerDto);
   }

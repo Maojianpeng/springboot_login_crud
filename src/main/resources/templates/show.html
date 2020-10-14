@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Show</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+<body>
+<table>
+    <thead>
+    <tr>
+        <td>姓名</td>
+        <td>年龄</td>
+        <a href="add.html">添加用户</a>
+    </tr>
+    </thead>
+    <tbody id="tab"></tbody>
+</table>
+
+<script type="text/javascript">
+    window.onload=function () {
+        $.ajax({
+            url: "/user/alluser",
+            type: "get",
+            dataType: "json",
+            success: function (data) {
+                // console.log(data);
+                /*这个方法里是ajax发送请求成功之后执行的代码*/
+                showData(data.body);//我们仅做数据展示
+            },
+        });
+    };
+
+    //展示数据
+    function showData(data) {
+
+        let str = "";//定义用于拼接的字符串
+        for (let i = 0; i < data.length; i++) {
+            //拼接表格的行和列
+            str += `<tr><td> ${data[i].userName} </td><td> ${data[i].age} </td></tr>`;
+            //追加到table中
+        }
+        document.getElementById("tab").innerHTML = str;
+    }
+</script>
+</body>
+</html>
